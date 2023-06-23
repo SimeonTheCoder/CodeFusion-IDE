@@ -12,7 +12,8 @@ public class Keywords {
                     "con",
                     "jmp",
                     "sample",
-                    "out"
+                    "out",
+                    "return"
             )
     );
 
