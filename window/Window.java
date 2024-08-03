@@ -5,15 +5,19 @@ import lang.Keywords;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
 public class Window extends JPanel {
     private JFrame frame;
+    private String filename;
 
     private JTextArea area;
 
-    public Window(String name, int sizeX, int sizeY) {
+    public Window(String name, int sizeX, int sizeY, String filename) {
+        this.filename = filename;
+
         frame = new JFrame(name);
         frame.setSize(sizeX, sizeY);
 
@@ -24,14 +28,14 @@ public class Window extends JPanel {
         area = new JTextArea(100, 170);
         area.addKeyListener(new Keyboard(this));
 
-        area.setFont(new Font("Consolas",Font.PLAIN,20));
+        area.setFont(new Font("Cascadia Code",Font.PLAIN,20));
 
-        area.setForeground(Color.BLACK);
-        area.setBackground(Color.BLACK);
+//        area.setForeground(new Color(28, 29, 34));
+        area.setBackground(new Color(28, 29, 34));
 
         area.setCaretColor(Color.LIGHT_GRAY);
 
-        this.setBackground(Color.BLACK);
+        this.setBackground(new Color(28, 29, 34));
 
         this.add(area);
 
@@ -45,7 +49,7 @@ public class Window extends JPanel {
         super.paint(g);
 
         g.setColor(Color.WHITE);
-        g.setFont(new Font("Consolas",Font.PLAIN,20));
+        g.setFont(new Font("Cascadia Code",Font.PLAIN,20));
 
         String[] text = area.getText().split("\n");
 
@@ -68,17 +72,17 @@ public class Window extends JPanel {
                 }else{
                     if(i == copy.length() - 1) sequence.append(copy.charAt(i));
 
-                    if(Keywords.keywords.contains(sequence.toString())) {
-                        g.setColor(Color.BLUE);
+                    if(Keywords.keywords.contains(sequence.toString().toLowerCase())) {
+                        g.setColor(new Color(118, 150, 255));
 
                         for(int j = Math.max(0, i - sequence.length()); j < i; j ++) {
-                            g.drawString(String.valueOf(copy.charAt(j)), 25 + 11 * j, 20 + 24 * currRow);
+                            g.drawString(String.valueOf(copy.charAt(j)), 40 + 11 * j, 20 + 24 * currRow);
                         }
                     }else if(Keywords.vars.contains(sequence.toString())  || sequence.toString().startsWith("_")) {
                         g.setColor(Color.GREEN);
 
                         for(int j = Math.max(0, i - sequence.length()); j < i; j ++) {
-                            g.drawString(String.valueOf(copy.charAt(j)), 25 + 11 * j, 20 + 24 * currRow);
+                            g.drawString(String.valueOf(copy.charAt(j)), 40 + 11 * j, 20 + 24 * currRow);
                         }
                     }
 
@@ -93,7 +97,7 @@ public class Window extends JPanel {
                     g.setColor(Color.WHITE);
                 }
 
-                g.drawString(String.valueOf(copy.charAt(i)), 25 + 11 * i, 20 + 24 * currRow);
+                g.drawString(String.valueOf(copy.charAt(i)), 40 + 11 * i, 20 + 24 * currRow);
             }
 
             currRow ++;
@@ -103,13 +107,13 @@ public class Window extends JPanel {
     }
 
     public void run() throws IOException {
-        FileWriter writer = new FileWriter("test.jpsl");
+        FileWriter writer = new FileWriter(new File(filename));
 
         writer.write(area.getText());
         writer.close();
 
-        Runtime rt = Runtime.getRuntime();
-        //Process pr = rt.exec("explorer");
-        Process pr = rt.exec("java -jar JPSL.jar -d -p(test.jpsl) -t8 -o(output.jpg)");
+//        Runtime rt = Runtime.getRuntime();
+//        //Process pr = rt.exec("explorer");
+//        Process pr = rt.exec("./nlang test");
     }
 }

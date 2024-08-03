@@ -7,13 +7,38 @@ import java.util.List;
 public class Keywords {
     public static final List<String> keywords = new ArrayList<>(
             Arrays.asList(
-                    "__main",
-                    "__tex",
-                    "con",
-                    "jmp",
-                    "sample",
-                    "out",
-                    "return"
+                    "add",
+                    "sub",
+                    "mul",
+                    "div",
+                    "inp",
+                    "print",
+                    "ln",
+                    "println",
+                    "printstr",
+                    "<",
+                    ">",
+                    "func",
+                    "def",
+                    "alias",
+                    "as",
+                    "if",
+                    "call",
+                    "mkfile",
+                    "open",
+                    "read",
+                    "write",
+                    "close",
+                    "writestr",
+                    "strequ",
+                    "arr",
+                    "at",
+                    "index",
+                    "delarr",
+                    "len",
+                    "set",
+                    "exit",
+                    "setstr"
             )
     );
 
@@ -32,15 +57,20 @@ public class Keywords {
                     '+',
                     '-',
                     '*',
-                    '/'
+                    '/',
+                    '@',
+                    '%',
+                    '$',
+                    '#',
+                    '"'
             )
     );
 
     public static final List<String> vars = new ArrayList<>(
             Arrays.asList(
-                    "vec3",
-                    "vec2",
-                    "tex"
+//                    "vec3",
+//                    "vec2",
+//                    "tex"
             )
     );
 }
